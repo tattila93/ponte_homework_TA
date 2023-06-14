@@ -33,14 +33,7 @@ public class SignService {
     private Signature signature;
 
 
-    /**
-     * @param picture
-     * @return
-     * @throws IncorrectKeyException
-     * @throws IncorrectAlgorithmException
-     * @throws IncorrectSignatureException
-     * @throws IncorrectFileException
-     */
+
     public String signAndEncodeToBase64(MultipartFile picture) throws IncorrectKeyException, IncorrectAlgorithmException, IncorrectSignatureException, IncorrectFileException {
         this.privateKey = loadPrivateKey();
         createSignatureInstance();
@@ -49,10 +42,7 @@ public class SignService {
         return Base64.getEncoder().encodeToString(signedData);
     }
 
-    /**
-     * @throws IncorrectAlgorithmException
-     * @throws IncorrectKeyException
-     */
+
     private void createSignatureInstance() throws IncorrectAlgorithmException, IncorrectKeyException {
         try {
             signature = Signature.getInstance("SHA256withRSA");
@@ -65,11 +55,7 @@ public class SignService {
         }
     }
 
-    /**
-     * @param picture
-     * @throws IncorrectFileException
-     * @throws IncorrectSignatureException
-     */
+
     private void updateToBeSigned(MultipartFile picture) throws IncorrectFileException, IncorrectSignatureException {
         try {
             signature.update(picture.getBytes());
@@ -81,10 +67,7 @@ public class SignService {
         }
     }
 
-    /**
-     * @return signed data
-     * @throws IncorrectSignatureException
-     */
+
     private byte[] signData() throws IncorrectSignatureException {
         byte[] signedData;
         try {
@@ -97,12 +80,7 @@ public class SignService {
     }
 
 
-    /**
-     * @return
-     * @throws IncorrectFileException
-     * @throws IncorrectAlgorithmException
-     * @throws IncorrectKeyException
-     */
+
     private PrivateKey loadPrivateKey() throws IncorrectFileException, IncorrectAlgorithmException, IncorrectKeyException {
         try (FileInputStream inputStream = new FileInputStream(PRIVATE_KEY_PATH)) {
             byte[] keyBytes = inputStream.readAllBytes();

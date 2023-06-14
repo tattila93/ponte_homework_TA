@@ -81,9 +81,6 @@ public class ImageStore {
     }
 
 
-    /**
-     * @return List<ImageMeta>
-     */
     public List<ImageMeta> findAll() {
         return imageRepository.findAll()
                 .stream()
@@ -91,13 +88,7 @@ public class ImageStore {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * @param file
-     * @throws IncorrectSignatureException
-     * @throws IncorrectKeyException
-     * @throws IncorrectAlgorithmException
-     * @throws IOException
-     */
+
     public void saveImage(MultipartFile file) throws IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException, IOException {
 
         if (isSufficientSize(file) && isPicture(file)) {
@@ -110,23 +101,17 @@ public class ImageStore {
             image.setImageData(file.getBytes());
             imageRepository.save(image);
             logger.info("Image saved successfully.");
-        }else {
+        } else {
             logger.warn("The file format or file size does not met the expectations.");
         }
     }
 
-    /**
-     * @param file
-     * @return
-     */
+
     private boolean isPicture(MultipartFile file) {
         return Objects.requireNonNull(file.getContentType()).toLowerCase().contains("image");
     }
 
-    /**
-     * @param file
-     * @return
-     */
+
     private boolean isSufficientSize(MultipartFile file) {
         return file.getSize() < DataSize.parse(maxFileSize).toBytes();
     }
