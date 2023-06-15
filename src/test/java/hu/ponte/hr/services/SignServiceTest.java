@@ -43,19 +43,20 @@ class SignServiceTest {
 
     @Test
     void signAndEncodeToBase64Test1() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
-        MockMultipartFile test = new MockMultipartFile("file", "cat.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/cat.jpg")));
-        assertEquals(files.get("cat.jpg"), signService.signAndEncodeToBase64(test));
+        MockMultipartFile catImage = new MockMultipartFile("file", "cat.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/cat.jpg")));
+        assertEquals(files.get("cat.jpg"), signService.signAndEncodeToBase64(catImage));
 
     }
     @Test
     void signAndEncodeToBase64Test2() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
-        MockMultipartFile test = new MockMultipartFile("file", "enhanced-buzz.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/enhanced-buzz.jpg")));
-        assertEquals(files.get("enhanced-buzz.jpg"), signService.signAndEncodeToBase64(test));
+        MockMultipartFile enhancedBuzzImage = new MockMultipartFile("file", "enhanced-buzz.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/enhanced-buzz.jpg")));
+        assertEquals(files.get("enhanced-buzz.jpg"), signService.signAndEncodeToBase64(enhancedBuzzImage));
     }
 
     @Test
     void signAndEncodeToBase64Test3() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
-        MockMultipartFile test = new MockMultipartFile("file", "rnd.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/rnd.jpg")));
-        assertEquals(files.get("rnd.jpg"), signService.signAndEncodeToBase64(test));
+        MockMultipartFile rndImage = new MockMultipartFile("file", "rnd.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/rnd.jpg")));
+        assertEquals(files.get("rnd.jpg"), signService.signAndEncodeToBase64(rndImage));
     }
+
 }

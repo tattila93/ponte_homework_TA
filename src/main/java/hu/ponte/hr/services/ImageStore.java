@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,12 @@ import java.util.stream.Collectors;
  * finds the image entity with the given id in the database
  * if there is no entity with the given id it throws an EntityNotFoundException
  * else returns with the entity *
+ * <p>
+ * findByName()
+ * parameter: String
+ * finds the image entity with the given name in the database
+ * and returns with the entity
+ *
  * <p>
  * findAll()
  * parameter: -
@@ -57,8 +64,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class ImageStore {
 
-    @Value("${spring.servlet.multipart.max-file-size}")
-    private String maxFileSize;
+    private final String maxFileSize;
 
     private static final Logger logger = LoggerFactory.getLogger(ImageStore.class);
     private final ImageRepository imageRepository;
@@ -67,19 +73,20 @@ public class ImageStore {
 
 
     @Autowired
-    public ImageStore(ImageRepository imageRepository, SignService signService) {
+    public ImageStore(ImageRepository imageRepository, SignService signService,  @Value("${spring.servlet.multipart.max-file-size}") String maxFileSize) {
         this.imageRepository = imageRepository;
         this.signService = signService;
+        this.maxFileSize = maxFileSize;
     }
 
-    /**
-     * @param id
-     * @return ImageEntity
-     */
+
     public ImageEntity findById(String id) {
         return imageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Optional<ImageEntity> findByName(String name) {
+        return imageRepository.findByName(name);
+    }
 
     public List<ImageMeta> findAll() {
         return imageRepository.findAll()
@@ -115,6 +122,5 @@ public class ImageStore {
     private boolean isSufficientSize(MultipartFile file) {
         return file.getSize() < DataSize.parse(maxFileSize).toBytes();
     }
-
 
 }
