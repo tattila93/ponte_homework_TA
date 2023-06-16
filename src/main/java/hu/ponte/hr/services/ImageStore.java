@@ -57,7 +57,7 @@ import java.util.stream.Collectors;
  * <p>
  * isSufficientSize()
  * parameter: Multipart file
- * checks whether the file you want to upload is not bigger than 2MB
+ * checks whether the file you want to upload is not bigger than the max limit (currently 2Mb)
  * returns a boolean
  */
 @Service
@@ -80,14 +80,30 @@ public class ImageStore {
     }
 
 
+    /**
+     *  Finds the image entity with the given id in the database.
+     *  If there is no entity with the given id it throws an EntityNotFoundException.
+     *  Else returns with the entity.
+     * @param id the id of the ImageEntity you are looking for
+     * @return ImageEntity
+     */
     public ImageEntity findById(String id) {
         return imageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    /**
+     *  Finds the image entity with the given name in the database.
+     * @param name the name of the ImageEntity you are looking for
+     * @return ImageEntity
+     */
     public Optional<ImageEntity> findByName(String name) {
         return imageRepository.findByName(name);
     }
 
+    /**
+     *  Finds all the image entities in the database and converts them into a DTO (ImageMeta) list.
+     * @return List<ImageMeta>
+     */
     public List<ImageMeta> findAll() {
         return imageRepository.findAll()
                 .stream()
@@ -96,6 +112,16 @@ public class ImageStore {
     }
 
 
+    /**
+     *  parameter: Multipart file
+     *  sets the imageEntity instance field with the given values if it is a picture and its size is not bigger than 2MB
+     *  else writes a warning message to the console
+     * @param file (MultipartFile)
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64 description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64 description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64 description
+     * @throws IOException if file not found.
+     */
     public void saveImage(MultipartFile file) throws IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException, IOException {
 
         if (isSufficientSize(file) && isPicture(file)) {
@@ -114,11 +140,23 @@ public class ImageStore {
     }
 
 
+    /**
+     * isPicture()
+     * Checks whether the file, you want to upload is a picture or not.
+     * @param file (MultipartFile)
+     * @return boolean
+     */
     private boolean isPicture(MultipartFile file) {
         return Objects.requireNonNull(file.getContentType()).toLowerCase().contains("image");
     }
 
 
+    /**
+     * Tests whether the size of the file is below the maximum limit or not.
+     * This value can be edited in application.properties
+     * @param file (MultipartFile)
+     * @return boolean
+     */
     private boolean isSufficientSize(MultipartFile file) {
         return file.getSize() < DataSize.parse(maxFileSize).toBytes();
     }
