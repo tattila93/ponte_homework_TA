@@ -28,13 +28,13 @@ import java.util.Base64;
  *
  *
  * createSignatureInstance()
- * create a signature instance with SHA256withRSA algorithm
+ * creates a signature instance with SHA256withRSA algorithm
  *
  * updateToBeSigned()
- * Update the data to be signed
+ * Updates the data to be signed
  *
  * signData()
- * Sign the data
+ * Signs the data
  *
  * encodeToBase64()
  * Encode the signed data with BASE64
@@ -54,7 +54,14 @@ public class SignService {
     private Signature signature;
 
 
-
+    /**
+     * @param picture (MultipartFile)
+     * @return a String which is created with SHA256withRSA algorithm and encoded with BASE64
+     * @throws IncorrectKeyException if the given key is invalid
+     * @throws IncorrectAlgorithmException if the given algorithm is invalid
+     * @throws IncorrectSignatureException if the signature cannot be updated
+     * @throws IncorrectFileException if the program cannot find the file in the given Path
+     */
     public String signAndEncodeToBase64(MultipartFile picture) throws IncorrectKeyException, IncorrectAlgorithmException, IncorrectSignatureException, IncorrectFileException {
         this.privateKey = loadPrivateKey();
         createSignatureInstance();
@@ -64,6 +71,11 @@ public class SignService {
     }
 
 
+    /**
+     * Creates a signature instance with SHA256withRSA algorithm.
+     * @throws IncorrectAlgorithmException if Signature.getInstance() gets incorrect parameter
+     * @throws IncorrectKeyException if signature.initSign() gets incorrect parameter
+     */
     private void createSignatureInstance() throws IncorrectAlgorithmException, IncorrectKeyException {
         try {
             signature = Signature.getInstance("SHA256withRSA");
@@ -77,6 +89,12 @@ public class SignService {
     }
 
 
+    /**
+     * Updates the data to be signed.
+     * @param picture (MultipartFile)
+     * @throws IncorrectFileException if file not found.
+     * @throws IncorrectSignatureException if signature cannot be updated.
+     */
     private void updateToBeSigned(MultipartFile picture) throws IncorrectFileException, IncorrectSignatureException {
         try {
             signature.update(picture.getBytes());
@@ -89,6 +107,11 @@ public class SignService {
     }
 
 
+    /**
+     * Signs the data.
+     * @return byte[] which is the signed data
+     * @throws IncorrectSignatureException if signature cannot be signed
+     */
     private byte[] signData() throws IncorrectSignatureException {
         byte[] signedData;
         try {
@@ -101,7 +124,18 @@ public class SignService {
     }
 
 
-
+    /**
+     *  loadPrivateKey() is for:
+     *  read the file of the given path,
+     *  it creates a byte array from it.
+     *  With the given byte array it creates a new encoded "PKCS8EncodedKeySpec" with "PKCS#8" standard.
+     *  Then it gets an object("KeyFactory") that converts the keys of the specified algorithm ("RSA").
+     *  It returns with "privateKey" which is found in PKCS8 format and converted with RSA algorithm.
+     * @return PrivateKey, which is found in PKCS8 format and converted with RSA algorithm
+     * @throws IncorrectFileException if the file not found on the given Path
+     * @throws IncorrectAlgorithmException if the given algorithm is incorrect
+     * @throws IncorrectKeyException if the given key is invalid
+     */
     private PrivateKey loadPrivateKey() throws IncorrectFileException, IncorrectAlgorithmException, IncorrectKeyException {
         try (FileInputStream inputStream = new FileInputStream(PRIVATE_KEY_PATH)) {
             byte[] keyBytes = inputStream.readAllBytes();
