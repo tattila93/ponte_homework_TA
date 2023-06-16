@@ -27,6 +27,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author tattila93
+ * This class is for testing ImageStore class
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +49,7 @@ class ImageStoreTest {
 
     ImageStoreTest() throws IOException {
     }
+
 
     @BeforeEach
     public void init() {
@@ -67,6 +72,13 @@ class ImageStoreTest {
     MockMultipartFile rnd = new MockMultipartFile("rnd", "rnd.jpg",
             "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/rnd.jpg")));
 
+    /**
+     * Tests finding the entity by name from the database.
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void findByNameTest() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
         ImageEntity rndImage = new ImageEntity();
@@ -81,6 +93,13 @@ class ImageStoreTest {
         assertTrue(imageStore.findByName(rndImage.getName()).isPresent());
     }
 
+    /**
+     * Tests finding all the entities the database.
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void findAllTest() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
 
@@ -116,6 +135,13 @@ class ImageStoreTest {
 
     }
 
+    /**
+     * Tests saving an image into the database.
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void saveImageTest() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
         when(signService.signAndEncodeToBase64(any(MultipartFile.class))).thenReturn(files.get("enhanced-buzz.jpg"));

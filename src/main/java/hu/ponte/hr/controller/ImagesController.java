@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-
-//  the OpenAPI descriptions will be available at the path /v3/api-docs by default:
-//  http://localhost:8080/v3/api-docs/
-//  http://localhost:8080/swagger-ui.html
-
+/**
+  * @author tattila93
+  * the OpenAPI descriptions will be available at the path /v3/api-docs by default:
+  * http://localhost:8080/v3/api-docs/
+  * http://localhost:8080/swagger-ui.html
+*/
 
 @RestController()
 @RequestMapping("api/images")

@@ -6,6 +6,7 @@ import lombok.Getter;
 
 /**
  * @author zoltan
+ * DTO of the images
  */
 @Getter
 public class ImageMeta

@@ -15,6 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+/**
+ * @author tattila93
+ * the OpenAPI descriptions will be available at the path /v3/api-docs by default:
+ * http://localhost:8080/v3/api-docs/
+ * http://localhost:8080/swagger-ui.html
+ */
 @Component
 @RestController
 @RequestMapping("api/file")
@@ -28,7 +34,7 @@ public class UploadController {
         this.imageStore = imageStore;
     }
 
-    @PostMapping("/post")
+    @PostMapping("post")
     @Operation(summary = "Uploads the picture.", description = "Uploads the chosen picture if it is in image format, and not bigger as 2MB")
     public ResponseEntity<Void> handleFormUpload(@RequestParam("file") MultipartFile file) throws IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException, IOException {
         imageStore.saveImage(file);

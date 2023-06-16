@@ -25,36 +25,36 @@ import java.util.stream.Collectors;
 
 
 /**
+ * The business logic of storing images.
+ *
  * findById()
  * parameter: String
  * finds the image entity with the given id in the database
  * if there is no entity with the given id it throws an EntityNotFoundException
  * else returns with the entity *
- * <p>
+ *
  * findByName()
  * parameter: String
  * finds the image entity with the given name in the database
  * and returns with the entity
  *
- * <p>
  * findAll()
  * parameter: -
  * finds all the image entities in the database and converts them into a DTO (ImageMeta) list
  * returns with the list
- * <p>
+ *
  * saveImage()
  * parameter: Multipart file
  * sets the imageEntity instance field with the given values if it is a picture and its size is not bigger than 2MB
  * else writes a warning message to the console
  * return value is void
- * <p>
- * <p>
+ *
  * isPicture()
  * parameter: Multipart file
  * checks whether the file you want to upload is a picture or not
  * cannot be null
  * returns a boolean
- * <p>
+ *
  * isSufficientSize()
  * parameter: Multipart file
  * checks whether the file you want to upload is not bigger than the max limit (currently 2Mb)
@@ -120,7 +120,7 @@ public class ImageStore {
      * @throws IncorrectSignatureException check signService.signAndEncodeToBase64 description
      * @throws IncorrectKeyException check signService.signAndEncodeToBase64 description
      * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64 description
-     * @throws IOException if file not found.
+     * @throws IOException if file not found
      */
     public void saveImage(MultipartFile file) throws IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException, IOException {
 

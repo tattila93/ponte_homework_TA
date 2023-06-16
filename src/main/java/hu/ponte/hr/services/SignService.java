@@ -18,6 +18,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
 /**
+ * The business logic of signing the images.
+ *
  * loadPrivateKey() is for
  * read the file of the given path
  * it creates a byte array from it

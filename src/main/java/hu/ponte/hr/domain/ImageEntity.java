@@ -8,6 +8,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * @author tattila93
+ * Represents how we want to store the images in the database
+ */
 @Entity
 @Getter
 @Setter

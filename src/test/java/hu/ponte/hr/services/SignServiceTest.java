@@ -21,6 +21,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author tattila93
+ * This class is for testing SignService class.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @ExtendWith(MockitoExtension.class)
@@ -41,18 +45,40 @@ class SignServiceTest {
         }
     };
 
+    /**
+     * Tests the signing of cat.jpg
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void signAndEncodeToBase64Test1() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
         MockMultipartFile catImage = new MockMultipartFile("file", "cat.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/cat.jpg")));
         assertEquals(files.get("cat.jpg"), signService.signAndEncodeToBase64(catImage));
 
     }
+
+    /**
+     * Tests the signing of enhanced-buzz.jpg
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void signAndEncodeToBase64Test2() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
         MockMultipartFile enhancedBuzzImage = new MockMultipartFile("file", "enhanced-buzz.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/enhanced-buzz.jpg")));
         assertEquals(files.get("enhanced-buzz.jpg"), signService.signAndEncodeToBase64(enhancedBuzzImage));
     }
 
+    /**
+     * Tests the signing of rnd.jpg
+     * @throws IOException if file not found.
+     * @throws IncorrectSignatureException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectKeyException check signService.signAndEncodeToBase64() description
+     * @throws IncorrectAlgorithmException check signService.signAndEncodeToBase64() description
+     */
     @Test
     void signAndEncodeToBase64Test3() throws IOException, IncorrectSignatureException, IncorrectKeyException, IncorrectAlgorithmException {
         MockMultipartFile rndImage = new MockMultipartFile("file", "rnd.jpg", "image/jpeg", Files.readAllBytes(Path.of("src/test/resources/images/rnd.jpg")));
