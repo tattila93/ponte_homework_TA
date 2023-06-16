@@ -26,36 +26,44 @@ import java.util.stream.Collectors;
 
 /**
  * The business logic of storing images.
+ * <p>
+ * @author tattila93
+ * <p>
  *
- * findById()
+ * -> findById()
  * parameter: String
  * finds the image entity with the given id in the database
  * if there is no entity with the given id it throws an EntityNotFoundException
- * else returns with the entity *
+ * else returns with the entity
+ *<p>
  *
- * findByName()
+ * -> findByName()
  * parameter: String
  * finds the image entity with the given name in the database
  * and returns with the entity
+ * <p>
  *
- * findAll()
+ * -> findAll()
  * parameter: -
  * finds all the image entities in the database and converts them into a DTO (ImageMeta) list
  * returns with the list
+ * <p>
  *
- * saveImage()
+ * -> saveImage()<
  * parameter: Multipart file
  * sets the imageEntity instance field with the given values if it is a picture and its size is not bigger than 2MB
  * else writes a warning message to the console
  * return value is void
+ * <p>
  *
- * isPicture()
+ * -> isPicture()
  * parameter: Multipart file
  * checks whether the file you want to upload is a picture or not
  * cannot be null
  * returns a boolean
+ * <p>
  *
- * isSufficientSize()
+ * -> isSufficientSize()
  * parameter: Multipart file
  * checks whether the file you want to upload is not bigger than the max limit (currently 2Mb)
  * returns a boolean

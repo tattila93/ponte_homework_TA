@@ -3,8 +3,8 @@ package hu.ponte.hr.exceptions;
 import java.io.IOException;
 
 /**
- * @author tattila93
  * Thrown if the file not found.
+ * @author tattila93
  */
 public class IncorrectFileException extends IOException {
 

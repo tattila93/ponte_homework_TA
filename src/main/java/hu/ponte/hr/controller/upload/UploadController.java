@@ -16,10 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
- * @author tattila93
- * the OpenAPI descriptions will be available at the path /v3/api-docs by default:
- * http://localhost:8080/v3/api-docs/
+ * With running application:
+ * <p>
+ * the OpenAPI descriptions will be available at the path /v3/api-docs by default:<br>
+ * http://localhost:8080/v3/api-docs/ <br>
  * http://localhost:8080/swagger-ui.html
+ * </p>
+ * @author tattila93
  */
 @Component
 @RestController

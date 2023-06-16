@@ -1,12 +1,11 @@
 package hu.ponte.hr.controller;
 
 import hu.ponte.hr.domain.ImageEntity;
-import lombok.Builder;
 import lombok.Getter;
 
 /**
- * @author zoltan
  * DTO of the images
+ * @author zoltan
  */
 @Getter
 public class ImageMeta

@@ -1,4 +1,4 @@
-package hu.ponte.hr.services;
+package hu.ponte.hr;
 
 import hu.ponte.hr.controller.ImageMeta;
 import hu.ponte.hr.domain.ImageEntity;
@@ -6,6 +6,8 @@ import hu.ponte.hr.exceptions.IncorrectAlgorithmException;
 import hu.ponte.hr.exceptions.IncorrectKeyException;
 import hu.ponte.hr.exceptions.IncorrectSignatureException;
 import hu.ponte.hr.repository.ImageRepository;
+import hu.ponte.hr.services.ImageStore;
+import hu.ponte.hr.services.SignService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,8 +30,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * @author tattila93
  * This class is for testing ImageStore class
+ * @author tattila93
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest()

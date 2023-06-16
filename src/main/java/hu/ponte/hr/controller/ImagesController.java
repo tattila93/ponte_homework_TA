@@ -11,16 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 /**
-  * @author tattila93
-  * the OpenAPI descriptions will be available at the path /v3/api-docs by default:
-  * http://localhost:8080/v3/api-docs/
-  * http://localhost:8080/swagger-ui.html
-*/
+ * With running application:
+ * <p>
+ * the OpenAPI descriptions will be available at the path /v3/api-docs by default:<br>
+ * http://localhost:8080/v3/api-docs/<br>
+ * http://localhost:8080/swagger-ui.html
+ * </p>
+ *
+ * @author tattila93
+ */
 
 @RestController()
 @RequestMapping("api/images")
@@ -39,16 +44,16 @@ public class ImagesController {
     @GetMapping("meta")
     @Operation(summary = "Lists images.", description = "Lists all the uploaded images.")
     public ResponseEntity<List<ImageMeta>> listImages() {
-		List<ImageMeta> imageMetaList = imageStore.findAll();
+        List<ImageMeta> imageMetaList = imageStore.findAll();
         return new ResponseEntity<>(imageMetaList, HttpStatus.OK);
 
     }
 
     @GetMapping("preview/{id}")
-    @Operation(summary = "Image information.", description = "Shows the information of the pictures." )
+    @Operation(summary = "Image information.", description = "Shows the information of the pictures.")
     public void getImage(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
         byte[] byteData = imageStore.findById(id).getImageData();
         response.getOutputStream().write(byteData);
-	}
+    }
 
 }

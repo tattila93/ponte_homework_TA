@@ -1,5 +1,6 @@
-package hu.ponte.hr.controller.upload;
+package hu.ponte.hr;
 
+import hu.ponte.hr.controller.upload.UploadController;
 import hu.ponte.hr.services.ImageStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @author tattila93
  * This class is for testing UploadController class
+ * @author tattila93
  */
 
 @RunWith(SpringRunner.class)

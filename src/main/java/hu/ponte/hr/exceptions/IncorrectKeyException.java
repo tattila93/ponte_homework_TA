@@ -3,8 +3,8 @@ package hu.ponte.hr.exceptions;
 import java.security.spec.InvalidKeySpecException;
 
 /**
- * @author tattila93
  * Thrown if the given key is invalid.
+ * @author tattila93
  */
 public class IncorrectKeyException extends InvalidKeySpecException {
 

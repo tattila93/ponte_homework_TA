@@ -1,10 +1,9 @@
-package hu.ponte.hr.controller;
+package hu.ponte.hr;
 
 
+import hu.ponte.hr.controller.ImageMeta;
+import hu.ponte.hr.controller.ImagesController;
 import hu.ponte.hr.domain.ImageEntity;
-import hu.ponte.hr.exceptions.IncorrectAlgorithmException;
-import hu.ponte.hr.exceptions.IncorrectKeyException;
-import hu.ponte.hr.exceptions.IncorrectSignatureException;
 import hu.ponte.hr.services.ImageStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,8 +28,8 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 /**
- * @author tattila93
  * This class is for testing ImagesController class
+ * @author tattila93
  */
 @ExtendWith(MockitoExtension.class)
 class ImagesControllerTest {

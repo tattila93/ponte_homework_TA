@@ -19,26 +19,30 @@ import java.util.Base64;
 
 /**
  * The business logic of signing the images.
- *
- * loadPrivateKey() is for
+ * <p>
+ * @author tattila93
+ *<p>
+ * -> loadPrivateKey() is for
  * read the file of the given path
  * it creates a byte array from it
- * with the given byte array it creates a new encoded key with "PKCS#8" standard *
+ * with the given byte array it creates a new encoded key with "PKCS#8" standard
  * then it gets an object("KeyFactory") that converts the keys of the specified algorithm ("RSA")
  * and it returns with "privateKey" which is found in PKCS8 format and converted with RSA algorithm
+ * <p>
  *
- *
- *
- * createSignatureInstance()
+ * -> createSignatureInstance()
  * creates a signature instance with SHA256withRSA algorithm
+ * <p>
  *
- * updateToBeSigned()
+ * -> updateToBeSigned()
  * Updates the data to be signed
+ * <p>
  *
- * signData()
+ * -> signData()
  * Signs the data
+ * <p>
  *
- * encodeToBase64()
+ * -> encodeToBase64()
  * Encode the signed data with BASE64
  */
 
